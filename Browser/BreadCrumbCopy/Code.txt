@@ -1,0 +1,11 @@
+(() => {
+  let el = $0, parts = [];
+  while (el && el.nodeType === 1 && el !== document.documentElement) {
+    let s = el.tagName.toLowerCase();
+    if (el.id) s += '#' + el.id;
+    if (el.classList.length) s += '.' + [...el.classList].join('.');
+    parts.unshift(s);
+    el = el.parentElement;
+  }
+  copy(parts.join(' > '));
+})();
