@@ -4,7 +4,7 @@
 
 - **IME**:Google日本語入力。Ctrl+Spaceで日本語と英語を切り替える
 - **AHK**:AutoHotkey v2 の `keyboardcontroll_etc.ahk`
-  - Caps(JIS配列なのでスキャンコード `sc03A` で指定)を単独で押す → Ctrl+Space(IME切り替え)
+  - Caps(JIS配列なのでスキャンコード `sc03A` で指定)を単独で押す → IMEのON/OFFを直接切り替える(IMEの状態を取得できないアプリでは、代わりにCtrl+Spaceを送る)
   - Caps+各キー → Enter、BackSpace、矢印、数字など
 - **複数PC**:PowerToysの **Mouse Without Borders(MWB)** で、別PCのキーボードからこのPCを操作している
 
@@ -60,5 +60,4 @@ Caps → MWB → (変換前のCapsのまま)ネットワーク → このPCのAH
 
 | ファイル | 内容 |
 |---|---|
-| `keyboardcontroll_etc.ahk` | 今使っているスクリプト |
-| `keyboardcontroll_etc_fixed.ahk` | Ctrl+Spaceを送らず、IMEを直接切り替える版(`#SingleInstance Force` も追加)。必要になったら使う |
+| `keyboardcontroll_etc.ahk` | スクリプト本体。CapsでのIME切り替えは、Ctrl+Spaceを送らずにIMEを直接切り替える。`#SingleInstance Force` で二重起動も防ぐ |

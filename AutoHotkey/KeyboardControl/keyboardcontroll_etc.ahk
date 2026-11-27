@@ -1,4 +1,5 @@
-#Requires AutoHotkey v2.0
+﻿#Requires AutoHotkey v2.0
+#SingleInstance Force
 
 ; --- スクロール系 ---
 PgUp::MouseClick "WheelUp", , , 1
@@ -93,7 +94,26 @@ MoveMouseLoop() {
 
 ; Caps 単体で押して離したとき → Ctrl+Space（IMEの英字かな切り替え）
 ; ほかのキーと組み合わせたときは送られない
-sc03A::Send "^{Space}"
+sc03A::IME_Toggle()   ; Ctrl+Spaceを送らず、IMEのON/OFFを直接切り替える
+
+IME_Toggle() {
+    DetectHiddenWindows True
+    hwnd := 0
+    try hwnd := ControlGetFocus("A")
+    if !hwnd
+        hwnd := WinExist("A")
+    ime := hwnd ? DllCall("imm32\ImmGetDefaultIMEWnd", "Ptr", hwnd, "Ptr") : 0
+    if !ime {
+        Send "^{Space}"   ; IMEウィンドウが取れないアプリだけ従来の方法
+        return
+    }
+    try {
+        state := SendMessage(0x283, 0x5, 0, , "ahk_id " ime)   ; 現在のIME状態
+        SendMessage(0x283, 0x6, !state, , "ahk_id " ime)       ; 反転
+    } catch {
+        Send "^{Space}"
+    }
+}
 
 ; --- Caps + 基本キー ---
 sc03A & m::Send "{Enter}"      ; Caps + M → Enter
