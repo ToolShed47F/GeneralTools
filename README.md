@@ -5,3 +5,4 @@
 | フォルダ | 内容 |
 |---|---|
 | [ActiveDirectory](ActiveDirectory/) | CSVからADユーザーを一括作成するPowerShellスクリプト |
+| [AutoHotkey](AutoHotkey/) | CapsキーでのIME切り替えやキーボードでのマウス操作などをするAutoHotkey v2スクリプト |
